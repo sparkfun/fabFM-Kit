@@ -1,4 +1,4 @@
 Fab-FM-Kit
 ==========
 
-FM radio kit with enclosure
+Code goes here. See the [wiki](https://github.com/a1ronzo/Fab-FM-Kit/wiki) for assembly instuctions. 
