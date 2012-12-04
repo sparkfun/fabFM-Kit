@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.2">
+<eagle version="6.3">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -9407,7 +9407,7 @@ Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LE
 <part name="R3" library="SparkFun" deviceset="RESISTOR" device="PTH-1/4W" value="15k"/>
 <part name="SJ1" library="SparkFun-Passives" deviceset="SOLDERJUMPER" device="NO"/>
 <part name="JP9" library="SparkFun" deviceset="LOGO-SFE" device="NEW"/>
-<part name="JP2" library="SparkFun-Connectors" deviceset="M10" device="&quot;"/>
+<part name="JP2" library="SparkFun-Connectors" deviceset="M10" device="LOCK" value="M10LOCK"/>
 <part name="JP12" library="SparkFun-Connectors" deviceset="M07" device=""/>
 <part name="GND17" library="SparkFun" deviceset="GND" device=""/>
 <part name="R4" library="SparkFun" deviceset="RESISTOR" device="PTH-1/4W" value="DNP-330"/>
@@ -9431,6 +9431,8 @@ Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LE
 <text x="170.18" y="7.62" size="1.778" layer="97">Revised by A.Weiss</text>
 <text x="165.1" y="88.9" size="1.778" layer="97">*internal pullups enabled*</text>
 <text x="45.72" y="180.34" size="1.778" layer="97">*it is suggested to use a 9V wall wart with at least 100mA output</text>
+<text x="322.58" y="251.46" size="1.778" layer="97">v11: removed tStop label over fabfm kit</text>
+<text x="330.2" y="248.92" size="1.778" layer="97">added lock FP for JP2</text>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.2">
+<eagle version="6.3">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -125,7 +125,7 @@
 <wire x1="72.39" y1="41.91" x2="67.31" y2="41.91" width="0.254" layer="21"/>
 <wire x1="67.31" y1="26.67" x2="67.31" y2="41.91" width="0.254" layer="21"/>
 <text x="35.19" y="-5.54" size="1.778" layer="51" font="vector" ratio="15">BACK</text>
-<text x="74.897" y="49.843" size="1.778" layer="16" font="vector" ratio="20" rot="SMR270">v10</text>
+<text x="74.897" y="49.843" size="1.778" layer="16" font="vector" ratio="20" rot="SMR270">v11</text>
 <text x="35.369" y="66.735" size="1.016" layer="21" font="vector" ratio="15">speaker</text>
 <text x="31.115" y="62.23" size="2.1844" layer="21" font="vector" ratio="15">+</text>
 <text x="43.815" y="62.23" size="2.1844" layer="21" font="vector" ratio="15">-</text>
@@ -5067,7 +5067,6 @@
 <rectangle x1="12.6629625" y1="51.5856625" x2="12.69725" y2="51.59709375" layer="21"/>
 <rectangle x1="19.693115625" y1="51.5856625" x2="19.727403125" y2="51.59709375" layer="21"/>
 <rectangle x1="12.674390625" y1="51.59709375" x2="12.685821875" y2="51.608525" layer="21"/>
-<text x="3.81" y="54.61" size="1.9304" layer="29" font="vector" ratio="20">FM Radio Kit</text>
 <rectangle x1="4.87759375" y1="54.71715625" x2="5.35384375" y2="54.75684375" layer="21"/>
 <rectangle x1="24.08634375" y1="54.71715625" x2="24.56259375" y2="54.75684375" layer="21"/>
 <rectangle x1="4.71884375" y1="54.75684375" x2="5.51259375" y2="54.79653125" layer="21"/>
@@ -6746,7 +6745,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 &lt;br&gt;&lt;br&gt;
 &lt;b&gt;Licensing:&lt;/b&gt; CC v3.0 Share-Alike You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
 <packages>
-<package name="1X10">
+<package name="1X10_LOCK">
 <wire x1="14.605" y1="1.27" x2="15.875" y2="1.27" width="0.2032" layer="21"/>
 <wire x1="15.875" y1="1.27" x2="16.51" y2="0.635" width="0.2032" layer="21"/>
 <wire x1="16.51" y1="-0.635" x2="15.875" y2="-1.27" width="0.2032" layer="21"/>
@@ -6809,16 +6808,16 @@ We've spent an enormous amount of time creating and checking these footprints an
 <wire x1="22.225" y1="1.27" x2="21.59" y2="0.635" width="0.2032" layer="21"/>
 <wire x1="21.59" y1="-0.635" x2="22.225" y2="-1.27" width="0.2032" layer="21"/>
 <wire x1="23.495" y1="-1.27" x2="22.225" y2="-1.27" width="0.2032" layer="21"/>
-<pad name="1" x="0" y="0" drill="1.016" diameter="1.8796" rot="R90"/>
-<pad name="2" x="2.54" y="0" drill="1.016" diameter="1.8796" rot="R90"/>
-<pad name="3" x="5.08" y="0" drill="1.016" diameter="1.8796" rot="R90"/>
-<pad name="4" x="7.62" y="0" drill="1.016" diameter="1.8796" rot="R90"/>
-<pad name="5" x="10.16" y="0" drill="1.016" diameter="1.8796" rot="R90"/>
-<pad name="6" x="12.7" y="0" drill="1.016" diameter="1.8796" rot="R90"/>
-<pad name="7" x="15.24" y="0" drill="1.016" diameter="1.8796" rot="R90"/>
-<pad name="8" x="17.78" y="0" drill="1.016" diameter="1.8796" rot="R90"/>
-<pad name="9" x="20.32" y="0" drill="1.016" diameter="1.8796" rot="R90"/>
-<pad name="10" x="22.86" y="0" drill="1.016" diameter="1.8796" rot="R90"/>
+<pad name="1" x="0" y="0.127" drill="1.016" diameter="1.8796" rot="R90"/>
+<pad name="2" x="2.54" y="-0.127" drill="1.016" diameter="1.8796" rot="R90"/>
+<pad name="3" x="5.08" y="0.127" drill="1.016" diameter="1.8796" rot="R90"/>
+<pad name="4" x="7.62" y="-0.127" drill="1.016" diameter="1.8796" rot="R90"/>
+<pad name="5" x="10.16" y="0.127" drill="1.016" diameter="1.8796" rot="R90"/>
+<pad name="6" x="12.7" y="-0.127" drill="1.016" diameter="1.8796" rot="R90"/>
+<pad name="7" x="15.24" y="0.127" drill="1.016" diameter="1.8796" rot="R90"/>
+<pad name="8" x="17.78" y="-0.127" drill="1.016" diameter="1.8796" rot="R90"/>
+<pad name="9" x="20.32" y="0.127" drill="1.016" diameter="1.8796" rot="R90"/>
+<pad name="10" x="22.86" y="-0.127" drill="1.016" diameter="1.8796" rot="R90"/>
 <text x="-1.3462" y="1.8288" size="1.27" layer="25" ratio="10">&gt;NAME</text>
 <text x="-1.27" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
 <rectangle x1="14.986" y1="-0.254" x2="15.494" y2="0.254" layer="51"/>
@@ -7152,7 +7151,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <class number="0" name="default" width="0" drill="0">
 </class>
 </classes>
-<designrules>
+<designrules name="default">
 <description language="en">&lt;b&gt;EAGLE Design Rules&lt;/b&gt;
 &lt;p&gt;
 The default Design Rules have been set to cover
@@ -7382,7 +7381,7 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="65.659" y="33.382" size="0.4064" layer="28" rot="MR90"/>
 </element>
 <element name="JP9" library="SparkFun" package="SFE-NEW-WEBLOGO" value="LOGO-SFENEW" x="50.927" y="7.747" smashed="yes"/>
-<element name="JP2" library="SparkFun-Connectors" package="1X10" value="M10&quot;" x="1.27" y="8.89" smashed="yes" rot="R90">
+<element name="JP2" library="SparkFun-Connectors" package="1X10_LOCK" value="M10LOCK" x="1.27" y="8.89" smashed="yes" rot="R90">
 <attribute name="NAME" x="-0.5588" y="7.5438" size="1.27" layer="25" ratio="10" rot="R90"/>
 <attribute name="VALUE" x="4.445" y="7.62" size="1.27" layer="27" rot="R90"/>
 </element>
@@ -7468,7 +7467,7 @@ design rules under a new name.</description>
 <wire x1="7.62" y1="20.32" x2="7.62" y2="24.13" width="0.4064" layer="1"/>
 <wire x1="7.62" y1="24.13" x2="7.62" y2="31.623" width="0.4064" layer="1"/>
 <wire x1="7.62" y1="31.623" x2="9.017" y2="33.02" width="0.4064" layer="1"/>
-<wire x1="1.27" y1="24.13" x2="7.62" y2="24.13" width="0.4064" layer="1"/>
+<wire x1="1.143" y1="24.13" x2="7.62" y2="24.13" width="0.4064" layer="1"/>
 <contactref element="IC2" pad="21"/>
 <contactref element="IC2" pad="7"/>
 <contactref element="IC2" pad="20"/>
@@ -7544,14 +7543,14 @@ design rules under a new name.</description>
 <wire x1="14.859" y1="38.862" x2="12.954" y2="38.862" width="0.4064" layer="16"/>
 <wire x1="12.954" y1="38.862" x2="12.319" y2="38.227" width="0.4064" layer="16"/>
 <wire x1="12.319" y1="38.227" x2="12.319" y2="32.639" width="0.4064" layer="16"/>
-<wire x1="12.319" y1="32.639" x2="1.27" y2="21.59" width="0.4064" layer="16"/>
+<wire x1="12.319" y1="32.639" x2="1.397" y2="21.59" width="0.4064" layer="16"/>
 </signal>
 <signal name="SCL">
 <contactref element="IC2" pad="28"/>
 <contactref element="JP2" pad="5"/>
 <wire x1="13.97" y1="33.02" x2="13.97" y2="37.211" width="0.4064" layer="16"/>
 <wire x1="13.97" y1="33.02" x2="13.97" y2="31.75" width="0.4064" layer="16"/>
-<wire x1="13.97" y1="31.75" x2="1.27" y2="19.05" width="0.4064" layer="16"/>
+<wire x1="13.97" y1="31.75" x2="1.143" y2="19.05" width="0.4064" layer="16"/>
 </signal>
 <signal name="DTR">
 <contactref element="C1" pad="1"/>
@@ -7689,7 +7688,7 @@ design rules under a new name.</description>
 <wire x1="13.97" y1="31.75" x2="10.16" y2="27.94" width="0.4064" layer="1"/>
 <wire x1="10.16" y1="27.94" x2="10.16" y2="19.05" width="0.4064" layer="1"/>
 <wire x1="10.16" y1="19.05" x2="8.89" y2="17.78" width="0.4064" layer="1"/>
-<wire x1="1.27" y1="13.97" x2="5.08" y2="13.97" width="0.4064" layer="1"/>
+<wire x1="1.143" y1="13.97" x2="5.08" y2="13.97" width="0.4064" layer="1"/>
 <wire x1="5.08" y1="13.97" x2="8.89" y2="17.78" width="0.4064" layer="1"/>
 <wire x1="22.86" y1="31.75" x2="23.6855" y2="31.75" width="0.4064" layer="1"/>
 <wire x1="23.6855" y1="31.75" x2="26.67" y2="28.7655" width="0.4064" layer="1"/>
@@ -7742,10 +7741,10 @@ design rules under a new name.</description>
 <contactref element="R3" pad="P$1"/>
 <contactref element="JP2" pad="9"/>
 <contactref element="JP2" pad="10"/>
-<wire x1="1.27" y1="29.21" x2="1.27" y2="31.75" width="0.4064" layer="1"/>
+<wire x1="1.143" y1="29.21" x2="1.397" y2="31.75" width="0.4064" layer="1"/>
 <wire x1="27.94" y1="45.72" x2="12.7" y2="45.72" width="0.4064" layer="16"/>
 <wire x1="12.7" y1="45.72" x2="1.27" y2="34.29" width="0.4064" layer="16"/>
-<wire x1="1.27" y1="34.29" x2="1.27" y2="31.75" width="0.4064" layer="16"/>
+<wire x1="1.27" y1="34.29" x2="1.397" y2="31.75" width="0.4064" layer="16"/>
 </signal>
 <signal name="A">
 <contactref element="U2" pad="A"/>
@@ -7856,58 +7855,6 @@ design rules under a new name.</description>
 <wire x1="48.26" y1="48.01" x2="43.27" y2="53" width="0.254" layer="16"/>
 </signal>
 </signals>
-<errors>
-<approved hash="4,1,6ba16f036c7b6b3b"/>
-<approved hash="4,1,6c676c056d0f6c6f"/>
-<approved hash="4,1,131f114511cf6c97"/>
-<approved hash="4,1,6f616d476ddf6c9f"/>
-<approved hash="4,1,6c61687b69f36c6b"/>
-<approved hash="4,1,6a216807681f6a97"/>
-<approved hash="4,1,6f616ccb6f736e7b"/>
-<approved hash="4,1,6b6768c56f7f6a7f"/>
-<approved hash="4,1,62216003600b62ab"/>
-<approved hash="4,1,6e236c056c136eab"/>
-<approved hash="4,1,6b63694569db6c9b"/>
-<approved hash="4,1,6faf6f05687f6f37"/>
-<approved hash="4,1,6f616cc76f4f6e6f"/>
-<approved hash="4,1,6c617007710f6c17"/>
-<approved hash="4,1,6fa36f0560736f3b"/>
-<approved hash="4,1,6e276c056c1f6e9f"/>
-<approved hash="4,1,6f216d436dcb6cab"/>
-<approved hash="4,1,029c6f6e6a9c056f"/>
-<approved hash="4,1,c49b3b6f1e9f0368"/>
-<approved hash="4,1,52499b918f3db77a"/>
-<approved hash="4,1,5a41c00dd579be42"/>
-<approved hash="4,1,424de927ec37a67e"/>
-<approved hash="4,1,53abef5cf0a2b658"/>
-<approved hash="4,1,6253c4bae3dcbe00"/>
-<approved hash="4,1,5a43d5e8c90ebf70"/>
-<approved hash="4,16,6f616d476ddf6c9f"/>
-<approved hash="4,16,6e236c056c136eab"/>
-<approved hash="4,16,6f616ccb6f736e7b"/>
-<approved hash="4,16,6c617007710f6c17"/>
-<approved hash="4,16,6b63694569db6c9b"/>
-<approved hash="4,16,62216003600b62ab"/>
-<approved hash="4,16,6c676c056d0f6c6f"/>
-<approved hash="4,16,6a216807681f6a97"/>
-<approved hash="4,16,6f216d436dcb6cab"/>
-<approved hash="4,16,6e276c056c1f6e9f"/>
-<approved hash="4,16,6ba16f036c7b6b3b"/>
-<approved hash="4,16,6f616cc76f4f6e6f"/>
-<approved hash="4,16,6fa36f0560736f3b"/>
-<approved hash="4,16,6b6768c56f7f6a7f"/>
-<approved hash="4,16,6c61687b69f36c6b"/>
-<approved hash="4,16,131f114511cf6c97"/>
-<approved hash="4,16,6faf6f05687f6f37"/>
-<approved hash="4,16,029c6f6e6a9c056f"/>
-<approved hash="4,16,c49b3b6f1e9f0368"/>
-<approved hash="4,16,5a41c00dd579be42"/>
-<approved hash="4,16,52499b918f3db77a"/>
-<approved hash="4,16,53abef5cf0a2b658"/>
-<approved hash="4,16,6253c4bae3dcbe00"/>
-<approved hash="4,16,424de927ec37a67e"/>
-<approved hash="4,16,5a43d5e8c90ebf70"/>
-</errors>
 </board>
 </drawing>
 </eagle>
