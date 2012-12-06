@@ -70,6 +70,7 @@ void setup()
   // start radio module
   radio.powerOn(); // turns the module on
   radio.setChannel(channel); // loads saved channel
+  radio.setVolume(15);
   digitalWrite(LED, HIGH); //turn LED ON
   
   //start serial and print welcome screen with station number
