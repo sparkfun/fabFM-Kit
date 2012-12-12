@@ -1,7 +1,8 @@
 Fab-FM-Kit
 ==========
 
-*See the [wiki](https://github.com/a1ronzo/fabFM-Kit/wiki) for assembly instuctions.*
+*See the wiki for assembly instuctions.*
+https://github.com/a1ronzo/fabFM-Kit/wiki
 
 Hardware contains the Eagle PCB layout files and the firmware contains the arduino sketch that is loaded onto the atmega328.
 
