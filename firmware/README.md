@@ -4,5 +4,5 @@ DO NOT use the 'Burn Bootloader' command in Arduino, since those use different f
 
 The Si4703 Library needs to be used and can be found [here](http://dlnmh9ip6v2uc.cloudfront.net/datasheets/BreakoutBoards/Si4703_Breakout-Arduino_1_compatible.zip)
 
-For more detailed instructions see the modification section](https://github.com/sparkfun/fabFM-Kit/wiki/Modifications) and (scroll down).
+For more detailed instructions see the [modification section](https://github.com/sparkfun/fabFM-Kit/wiki/Modifications) and (scroll down).
 
