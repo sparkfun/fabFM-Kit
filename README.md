@@ -1,13 +1,23 @@
-Fab-FM-Kit
-==========
+FabFM Radio Kit
+===============
+
+[![FabFM Radio Kit](https://dlnmh9ip6v2uc.cloudfront.net/images/products/1/1/0/4/3/11043-09_medium.jpg)  
+*FabFM Radio Kit (KIT-11043)*](https://www.sparkfun.com/products/11043)
+
+The FabFM is a stylish FM radio kit that can be built with just basic soldering tools. The PCB is all PTH, meaning that even a beginner solderer can put this kit together with a little time. The wooden, laser cut frame doesn't take any tools or glue to put together, each part press-fits into another. Once assembled the FabFM Radio Kit produces a fully functioning, old-school style FM radio.
 
 [*See the wiki for assembly instuctions.*](https://github.com/sparkfun/fabFM-Kit/wiki)
 
-Hardware contains the Eagle PCB layout files and the firmware contains the arduino sketch that is loaded onto the atmega328.
+Repository Contents
+-------------------
 
-License
-=====
+* **/enclosure** - Vector files for the enclosure
+* **/firmware** - Arduino sketch that is loaded onto the ATMega328
+* **/hardware** - Eagle PCB layout files
 
-[Creative Commons Attribution-ShareAlike](http://creativecommons.org/licenses/by-sa/3.0/)
+License Information
+-------------------
+
+All contents of this repository are released under [Creative Commons Share-alike 3.0](http://creativecommons.org/licenses/by-sa/3.0/).
 
 Authors: Aaron Weiss @ SparkFun Electonics, Original Design by David Mellis and Dana Gordon
