@@ -26,6 +26,12 @@
  */   
 ///////////////////////////////////////////////////////////////////
 
+//Uncomment the correct country type
+#define COUNTRY_US 1 //For US, North America and Australia
+#define COUNTRY_EUROPE 2 //Europe and Japan
+
+const byte myCountry = COUNTRY_US; //Set this to your specific country
+
 // Libraries needed
 // Si4703 lib: See above
 #include <Si4703_Breakout.h>
@@ -75,7 +81,7 @@ void setup()
   read_channel_from_EEPROM();
   
   // start radio module
-  radio.powerOn(); // turns the module on
+  radio.powerOn(myCountry); // Sets up module to work with a given country
   radio.setChannel(channel); // loads saved channel
   radio.setVolume(15); //Loudest volume setting
   digitalWrite(LED, HIGH); //turn LED ON
@@ -102,17 +108,19 @@ void loop()
     if(stationDirection == UP)
     {
       Serial.print("Up ");
-      channel += 2; //Channels change by 2 (975 to 973)
+      if(myCountry == COUNTRY_US) channel += 2; //Channels change by 2 (975 to 973)
+      if(myCountry == COUNTRY_EUROPE) channel += 1; //Channels change by 1 (901 to 902)
     }
     else if(stationDirection == DOWN)
     {
       Serial.print("Down ");
-      channel -= 2; //Channels change by 2 (975 to 973)
+      if(myCountry == COUNTRY_US) channel -= 2; //Channels change by 2 (975 to 973)
+      if(myCountry == COUNTRY_EUROPE) channel -= 1; //Channels change by 1 (901 to 902)
     }
     
     //Catch wrap conditions
     if(channel > 1079) channel = 875;
-    if(channel < 875) channel = 1079;
+    if(channel < 875) channel = 1079; //I'm not entirely sure this is correct for Europe
 
     Serial.println(channel, DEC); // print channel number
 
