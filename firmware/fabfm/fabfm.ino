@@ -21,10 +21,8 @@
  *   Operation:
  *   -Power switch and volume are on the left, tuner is on the right.
  *   -The board must be powered with a switch mode 9V DC wall wart.
- *   -To tune the station, the encoder must be turned at least 3clicks. 
- *   -The LED turns on when you are on a station.
- *   -The tuning moves to stations with a low RSSI (recieved signal
- *    strength indicator) so some numbers will be skipped. 
+ *   -Each click will increase/decrease station by 0.2MHz 
+ *   -The LED blinks for every step
  */   
 ///////////////////////////////////////////////////////////////////
 
