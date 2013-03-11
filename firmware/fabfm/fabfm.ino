@@ -59,7 +59,6 @@ const boolean UP = true;
 const boolean DOWN = false;
 volatile boolean stationDirection;
 
-
 // You must call this to define the pins and enable the FM radio 
 // module.
 Si4703_Breakout radio(resetPin, SDIO, SCLK);
@@ -100,38 +99,33 @@ void loop()
   //Wait until the interrupt tells us to update the station
   if(updateStation)
   {
-    updateStation = false; //Clear flag
+    digitalWrite(LED, LOW);
 
-    Serial.print(encoderValue);
-    Serial.print(" ");
-    Serial.print(goodEncoderValue);
-    Serial.print(" ");
-    
     if(stationDirection == UP)
     {
       Serial.print("Up ");
-
-      digitalWrite(LED, LOW);
-      channel = radio.seekUp(); // seek up and save channel value
-      Serial.println(channel, DEC); // print channel number
-      save_channel(); // save channel to EEPROM
-      digitalWrite(LED, HIGH);
-
+      channel += 2; //Channels change by 2 (975 to 973)
     }
-    if(stationDirection == DOWN)
+    else if(stationDirection == DOWN)
     {
       Serial.print("Down ");
-
-      digitalWrite(LED, LOW);
-      channel = radio.seekDown(); // seek down and save channel value
-      Serial.println(channel, DEC); // print channel number
-      save_channel(); // save channel to EEPROM
-      digitalWrite(LED, HIGH);
+      channel -= 2; //Channels change by 2 (975 to 973)
     }
+    
+    //Catch wrap conditions
+    if(channel > 1079) channel = 875;
+    if(channel < 875) channel = 1079;
 
-    Serial.println();
+    Serial.println(channel, DEC); // print channel number
+
+    radio.setChannel(channel); //Goto the new channel
+    save_channel(); // save channel to EEPROM
+
+    digitalWrite(LED, HIGH);
+    
+    updateStation = false; //Clear flag
   }
-  
+
   // You can put any additional code here, but keep in mind, 
   // the encoder interrupt is running in the background
 }
