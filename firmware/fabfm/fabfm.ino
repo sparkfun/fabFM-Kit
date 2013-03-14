@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////
- /*  FabFm Firmware v10 
+ /*  FabFm Firmware v11 
  *   
  *   Aaron Weiss, SparkFun 2012
  *   license: beerware
@@ -101,12 +101,12 @@ void loop()
 
     if(stationDirection == UP)
     {
-      Serial.print("Up ");
+      //Serial.print("Up ");
       channel += 2; //Channels change by 2 (975 to 973)
     }
     else if(stationDirection == DOWN)
     {
-      Serial.print("Down ");
+      //Serial.print("Down ");
       channel -= 2; //Channels change by 2 (975 to 973)
     }
     
