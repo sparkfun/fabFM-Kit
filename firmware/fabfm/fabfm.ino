@@ -15,21 +15,19 @@
  *   station over a serial terminal at 115200 and also saves the 
  *   station on subsequent power ups. 
  *
- *   The Si7703 libarary needs to be used:
+ *   The Si4703 libarary needs to be used:
  *   http://dlnmh9ip6v2uc.cloudfront.net/datasheets/BreakoutBoards/Si4703_Breakout-Arduino_1_compatible.zip
  *   
  *   Operation:
  *   -Power switch and volume are on the left, tuner is on the right.
  *   -The board must be powered with a switch mode 9V DC wall wart.
- *   -To tune the station, the encoder must be turned at least 3clicks. 
- *   -The LED turns on when you are on a station.
- *   -The tuning moves to stations with a low RSSI (recieved signal
- *    strength indicator) so some numbers will be skipped. 
+ *   -Each click will increase/decrease station by 0.2MHz 
+ *   -The LED blinks for every step
  */   
 ///////////////////////////////////////////////////////////////////
 
 // Libraries needed
-// Si4703 lib: http://dl.dropbox.com/u/3993179/Si4703_Breakout.zip
+// Si4703 lib: See above
 #include <Si4703_Breakout.h>
 // included with Arduino
 #include <Wire.h>
@@ -40,13 +38,24 @@
 const int resetPin = 4; //radio reset pin
 const int SDIO = A4; //radio data pin
 const int SCLK = A5; //radio clock pin
-const int E1 = 2; // encoder pin 1
-const int E2 = 3; // encoder pin 2
+const int encoderPin1 = 2; // encoder pin 1
+const int encoderPin2 = 3; // encoder pin 2
 const int LED = 5; //optional LED pin
 
 // Global Variables: these quantities change
 int channel;
 int rotate;
+
+//Volatile variables are needed if used within interrupts
+volatile int lastEncoded = 0;
+volatile long encoderValue = 0;
+
+volatile int goodEncoderValue;
+volatile boolean updateStation = false;
+
+const boolean UP = true;
+const boolean DOWN = false;
+volatile boolean stationDirection;
 
 // You must call this to define the pins and enable the FM radio 
 // module.
@@ -56,10 +65,8 @@ Si4703_Breakout radio(resetPin, SDIO, SCLK);
 void setup()
 {
   // both pins on the rotary encoder are inputs and pulled high
-  pinMode(E1, INPUT);
-  digitalWrite(E1, HIGH);
-  pinMode(E2, INPUT);
-  digitalWrite(E2, HIGH);
+  pinMode(encoderPin1, INPUT_PULLUP);
+  pinMode(encoderPin2, INPUT_PULLUP);
   
   // LED pin is output
   pinMode(LED, OUTPUT);
@@ -70,45 +77,55 @@ void setup()
   // start radio module
   radio.powerOn(); // turns the module on
   radio.setChannel(channel); // loads saved channel
-  radio.setVolume(15);
+  radio.setVolume(15); //Loudest volume setting
   digitalWrite(LED, HIGH); //turn LED ON
   
   //start serial and print welcome screen with station number
   Serial.begin(115200); //must use a fast baud to prevent errors
   Serial.print("\nfab fm: ");
   Serial.println(channel, DEC);
+
+  //call updateEncoder() when any high/low changed seen
+  //on interrupt 0 (pin 2), or interrupt 1 (pin 3) 
+  attachInterrupt(0, updateEncoder, CHANGE); 
+  attachInterrupt(1, updateEncoder, CHANGE);
 }
 
 // Arduino main loop
 void loop()
 {
-  seek_encoder(); //used to find a station based on the encoder
-  
+  //Wait until the interrupt tells us to update the station
+  if(updateStation)
+  {
+    digitalWrite(LED, LOW);
+
+    if(stationDirection == UP)
+    {
+      Serial.print("Up ");
+      channel += 2; //Channels change by 2 (975 to 973)
+    }
+    else if(stationDirection == DOWN)
+    {
+      Serial.print("Down ");
+      channel -= 2; //Channels change by 2 (975 to 973)
+    }
+    
+    //Catch wrap conditions
+    if(channel > 1079) channel = 875;
+    if(channel < 875) channel = 1079;
+
+    Serial.println(channel, DEC); // print channel number
+
+    radio.setChannel(channel); //Goto the new channel
+    save_channel(); // save channel to EEPROM
+
+    digitalWrite(LED, HIGH);
+    
+    updateStation = false; //Clear flag
+  }
+
   // You can put any additional code here, but keep in mind, 
-  // the more time spent out of seek_encoder, the easier it will
-  // be to skip over a station or cause seek errors.
-}
-
-// NAME: read_encoder(), from circuitsathome.com
-// DEFINITION: returns a 0 if there is no rotation on the encoder,
-// returns a -1 for clockwiese and 1 for counter-clockwise
-int read_encoder()
-{
-  // more information on this function can be found here:
-  // http://www.circuitsathome.com/mcu/reading-rotary-encoder-on-arduino
-  // enc_states[] array is a lookup table for possible encoder 
-  // states, defined as static to retain value between function 
-  // calls
-  static int8_t enc_states[] = {0,-1,1,0,1,0,0,-1,-1,0,0,1,0,1,-1,0};
-  static unsigned int old_AB = 0; //temporary variable
-
-  old_AB >>= 2; // remember previous state
-  old_AB |= (PIND & 0x0C);  // add current state, set port pins 2 
-                            // and 3 in PIND
-  // the final bitwise operation results in the previous state in 
-  // bit positions 2 and 3 and the current state in 0 and 1. The
-  // resulting value "points" to the correct array element.
-  return ( enc_states[( old_AB & 0x0f )]);
+  // the encoder interrupt is running in the background
 }
 
 // NAME: save_channel() 
@@ -133,45 +150,57 @@ void read_channel_from_EEPROM()
   channel = msb|lsb; // concatenate the lsb and msb
 }
 
-// NAME: seek_encoder() 
-// DEFINITION: reads read_encoder(), then adjusts and prints the 
-// station number
-void seek_encoder()
+//This is the interrupt that reads the encoder
+//It set the updateStation flag when a new indent is found 
+//Note: The encoder used on the FabFM has a mechanical indent every four counts
+//So most of the time, when you advance 1 click there are four interrupts
+//But there is no guarantee the user will land neaty on an indent, so this code cleans up the read
+//Modified from the bildr article: http://bildr.org/2012/08/rotary-encoder-arduino/
+void updateEncoder()
 {
-  // Create a variable that will increment or decrement based on
-  // the direction of the rotation.
-  static uint8_t counter = 125;
-  
-  // Read the encoder, rotate can be either 1 (CCW rotation), 
-  // -1 (CW rotation), or 0 (no rotation).
-  rotate = read_encoder();
-  
-  // If the encoder is rotated, add the encoder state to counter.
-  if(rotate)
-  {  
-    counter += rotate;
-    //digitalWrite(LED, LOW);
+  int MSB = digitalRead(encoderPin1); //MSB = most significant bit
+  int LSB = digitalRead(encoderPin2); //LSB = least significant bit
+
+  int encoded = (MSB << 1) |LSB; //converting the 2 pin value to single number
+  int sum  = (lastEncoded << 2) | encoded; //adding it to the previous encoded value
+
+  if(sum == 0b1101 || sum == 0b0100 || sum == 0b0010 || sum == 0b1011)
+  {
+    stationDirection = DOWN; //Counter clock wise
+    encoderValue--;
   }
-  
-  // if clockwise rotation
-  if(counter < 115)
-  {  
-    digitalWrite(LED, LOW);
-    channel = radio.seekUp(); // seek down and save channel value
-    Serial.println(channel, DEC); // print channel number
-    save_channel(); // save channel to EEPROM
-    counter = 125;
-    digitalWrite(LED, HIGH);
+  if(sum == 0b1110 || sum == 0b0111 || sum == 0b0001 || sum == 0b1000)
+  {
+    stationDirection = UP; //Clock wise
+    encoderValue++;
   }
 
-  // if counter clockwise rotation
-  if(counter > 135)
+  lastEncoded = encoded; //store this value for next time
+
+  //Wait until we are more than 3 ticks from previous used value
+  if(abs(goodEncoderValue - encoderValue) > 3)
   {
-    digitalWrite(LED, LOW);
-    channel = radio.seekDown(); // seek up and save channel value
-    Serial.println(channel, DEC); // print channel number
-    save_channel(); // save channel to EEPROM
-    counter = 125;
-    digitalWrite(LED, HIGH);
+    //The user can sometimes miss an indent by a count or two
+    //This logic tries to correct for that
+    //Remember, interrupts are happening in the background so encoderValue can change 
+    //throughout this code
+
+    if(encoderValue % 4 == 0) //Then we are on a good indent
+    {
+      goodEncoderValue = encoderValue; //Remember this good setting
+    }
+    else if( abs(goodEncoderValue - encoderValue) == 3) //The encoder is one short
+    {
+      if(encoderValue < 0) goodEncoderValue = encoderValue - 1; //Remember this good setting
+      if(encoderValue > 0) goodEncoderValue = encoderValue + 1; //Remember this good setting
+    }
+    else if( abs(goodEncoderValue - encoderValue) == 5) //The encoder is one too long
+    {
+      if(encoderValue < 0) goodEncoderValue = encoderValue + 1; //Remember this good setting
+      if(encoderValue > 0) goodEncoderValue = encoderValue - 1; //Remember this good setting
+    }
+
+    updateStation = true;
   }
 }
+
