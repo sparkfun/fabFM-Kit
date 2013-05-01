@@ -1,1 +1,0 @@
-These are the enclosure files in svg and pdf format. They were created to be used on a laser cutter with a 24x18 inch operating area. The veneer template is optional and can either be created with a laser cutter or just some scissors. 
